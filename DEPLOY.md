@@ -162,6 +162,27 @@ If Google gives you a verification `<meta>` tag, add it inside `<head>` in `inde
 
 ---
 
+## 8. Social media link preview (the image when you send the link)
+
+The preview image is `public/images/msmalabanan-og.jpg` (1200x630). The tags that point to it live in `index.html`, so Facebook, Messenger, WhatsApp, Viber and X can read them without running JavaScript.
+
+**This only works on the live domain.** `localhost` and the grey `*.vercel.app` preview URLs will not produce a card for other people.
+
+After the domain is live, test and refresh the cache on each platform:
+
+| Platform | Tool |
+|---|---|
+| Facebook / Messenger | [developers.facebook.com/tools/debug](https://developers.facebook.com/tools/debug/) → paste the URL → **Scrape Again** |
+| X / Twitter | [cards-dev.twitter.com/validator](https://cards-dev.twitter.com/validator) |
+| LinkedIn | [linkedin.com/post-inspector](https://www.linkedin.com/post-inspector/) |
+| Any platform | [opengraph.xyz](https://www.opengraph.xyz/) |
+
+These platforms cache the preview for days. If you change the banner, run **Scrape Again** in the Facebook debugger or the old image will keep showing.
+
+If you replace the image later, keep it at **1200x630** and **under 300 KB** — WhatsApp silently drops previews for larger files. Either overwrite `msmalabanan-og.jpg`, or use a new filename and update the `og:image`, `og:image:secure_url` and `twitter:image` tags in `index.html`.
+
+---
+
 ## Troubleshooting
 
 | Problem | What to check |
@@ -172,5 +193,7 @@ If Google gives you a verification `<meta>` tag, add it inside `<head>` in `inde
 | Old site still showing | Hard refresh, or wait for the new Vercel deployment to finish. |
 | `sitemap.xml` 404 | Confirm the file is in `public/sitemap.xml` and you deployed after that commit. |
 | GitHub push rejected | You are not signed in, or `main` already exists with different history. |
+| No image when sending the link | The domain must be live. Then run **Scrape Again** in the Facebook debugger (see section 8). |
+| Link preview shows the old image | Platform cache. Re-scrape with the tools in section 8. |
 
 This project already includes `vercel.json` (headers, trailing slash). You do not need to add a Vercel config in the dashboard beyond the Vite / `dist` settings above.
