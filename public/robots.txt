@@ -1,0 +1,14 @@
+# https://msmalabanan.com/robots.txt
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://msmalabanan.com/sitemap.xml
